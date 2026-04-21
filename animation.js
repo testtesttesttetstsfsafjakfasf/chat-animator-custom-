@@ -284,13 +284,9 @@ function drawTextBubble(ctx, message, left, y, canvas, animationSettings) {
         xPos = canvas.width - 10 - bubbleWidth;
     }
     const nameSizePixels = canvas.width * animationSettings.nameSizePercent;
-    if (animationSettings.showNames) {
-        if (!left) {
-            xPos -= nameSizePixels;
-        } else {
-            xPos += nameSizePixels;
-        }
-    }
+  if (animationSettings.showNames && left) {
+    xPos += nameSizePixels;
+}
     
     ctx.font = animationSettings.font;
     ctx.textBaseline = 'top';
@@ -458,7 +454,7 @@ function layout(ctx, chatMessages, canvas, animationSettings) {
         chatMessages[i].desiredPosition = baseHeight - thisBubbleHeight
         //console.log(`${baseHeight} ${chatMessages[i].desiredPosition}`);
         var pixelsBetweenMessageBubbles = animationSettings.chatBubbleSpacingPixels;
-        if (animationSettings.showNames) {
+        if (animationSettings.showNames && !message.profile.isMainPerson) {
             pixelsBetweenMessageBubbles += 0.5 * animationSettings.nameSizePercent * canvas.width;
         }
         baseHeight -= thisBubbleHeight +
@@ -574,7 +570,7 @@ function drawName(ctx, message, bottomHeight, canvas, animationSettings) {
  * @param animationSettings yep
  */
 function drawPicture(ctx, message, bottomHeight, canvas, animationSettings) {
-    if (animationSettings.showNames) {
+    if (animationSettings.showNames && !message.profile.isMainPerson) {
         const nudge = animationSettings.nudgeProfiles;
         const picSize = animationSettings.nameSizePercent * canvas.width;
         var clipX = (picSize / 2) + nudge;
