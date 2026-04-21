@@ -570,7 +570,7 @@ function drawName(ctx, message, bottomHeight, canvas, animationSettings) {
  * @param animationSettings yep
  */
 function drawPicture(ctx, message, bottomHeight, canvas, animationSettings) {
-    if (animationSettings.showNames && !message.profile.isMainPerson) {
+   if (animationSettings.showNames && !chatMessages[i].profile.isMainPerson) {
         const nudge = animationSettings.nudgeProfiles;
         const picSize = animationSettings.nameSizePercent * canvas.width;
         var clipX = (picSize / 2) + nudge;
